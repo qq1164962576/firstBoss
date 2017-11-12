@@ -22,7 +22,13 @@
 			}
 			
 			function doEdit(){
-				alert("修改...");
+				var rows = $("#grid").datagrid("getSelections");
+				if(rows.length == 1){
+					$("#addWindow").window('open');
+					$("#subareaForm").form('load',rows[0]);
+				}else{
+					$.messager.alert("选项错误","请勾选一项!","warning");
+				}
 			}
 			
 			function doDelete(){

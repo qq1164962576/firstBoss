@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.formula.SheetNameFormatter;
+
 
 /**
  * @description:地域信息实体类，主要包含 省市区(县)
@@ -119,7 +122,15 @@ public class Area {
 	public void setSubareas(Set<SubArea> subareas) {
 		this.subareas = subareas;
 	}
-
+	public void setName(String placename) {
+	    if(placename!=null&&StringUtils.isNotEmpty(placename)) {
+	        
+    	    String[] strings = placename.split("/");
+    	    this.province=strings[0].substring(0, strings[0].length()-1);
+    	    this.city=strings[1].substring(0, strings[2].length()-1);
+    	    this.district=strings[2].substring(0, strings[2].length()-1);
+	    }
+	}
 	@Override
 	public String toString() {
 		return "Area [id=" + id + ", province=" + province + ", city=" + city

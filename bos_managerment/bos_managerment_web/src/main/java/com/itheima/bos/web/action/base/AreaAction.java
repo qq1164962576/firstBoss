@@ -105,16 +105,10 @@ public class AreaAction extends BaseAction<Area> {
         return NONE;
     }
     
-    @Action("fixedAreaAction_save")
+    @Action(value=("areaAction_save"),results= {@Result(name="success",type="redirect",location="/page/base/area.html")})
     public String save() throws IOException {
-        List<Area> list ;
-        if(StringUtils.isNotEmpty(q)) {
-            list = areaService.findByQ(q);
-        }else {
-            list = areaService.findAll();
-        }
-        List2Json(list, new String[] {"subareas"});
-        return NONE;
+        areaService.save(getModel());
+        return SUCCESS;
     }
     @Action("areaAction_pageQuery")
     public String pageQuery() throws IOException{

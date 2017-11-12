@@ -26,10 +26,10 @@
 					border : false,
 					rownumbers : true,
 					striped : true,
-					pageList: [30,50,100],
+					pageList: [5,10,30,50,100],
 					pagination : true,
 					toolbar : toolbar,
-					url : "../../data/take_time.json",
+					url : "../../takeTimeAction_findAll.action",
 					idField : 'id',
 					columns : columns
 				});
@@ -41,7 +41,8 @@
 				text : '增加',
 				iconCls : 'icon-add',
 				handler : function(){
-					alert('增加');
+					$("#addWindow").window("open");
+					
 				}
 			}, {
 				id : 'button-edit',
@@ -124,11 +125,92 @@
 				width : 120,
 				align : 'center'
 			} ] ];
+			function subTakeTimeForm(){
+		 		$("#takeTimeForm").submit();
+			}
 		</script>
 	</head>
 	<body class="easyui-layout" style="visibility:hidden;">
 		<div region="center" border="false">
 			<table id="grid"></table>
+		</div>
+		<div class="easyui-window"style="width: 400px;" title="添加修改" id="addWindow" collapsible="false" closed="true"  minimizable="false"  maximizable="false" style="top:20px;left:200px">
+			<div style="height:31px;overflow:hidden;" split="false" border="false">
+				<div class="datagrid-toolbar">
+					<a id="save" icon="icon-save" href="#" onclick="subTakeTimeForm()" class="easyui-linkbutton" plain="true">保存</a>
+					</script>
+				</div>
+			</div>
+
+			<div style="overflow:auto;padding:5px;" border="false">
+				<form id="takeTimeForm" method="post" action="../../takeTimeAction_save.action">
+					<table class="table-edit" width="80%" align="center">
+						<tr class="title">
+							<td colspan="2">时间信息</td>
+						</tr>
+						<tr>
+							<td>时间名称</td>
+							<td><input type="text" name="name" class="easyui-validatebox"
+								required="true" /></td>
+						</tr>
+						<tr>
+							<td>平时上班时间</td>
+							<td><input type="text" name="normalWorkTime" class="easyui-validatebox"
+								required="true" /></td>
+						</tr>
+						<tr>
+							<td>平时休息时间</td>
+							<td><input type="text" name="normalDutyTime" class="easyui-validatebox"
+								required="true" /></td>
+						</tr>
+						<tr>
+							<td>周六上班时间</td>
+							<td><input type="text" name="satWorkTime" class="easyui-validatebox"
+								required="true" /></td>
+						</tr>
+						<tr>
+							<td>周六休息时间</td>
+							<td><input type="text" name="satDutyTime" class="easyui-validatebox"
+								required="true" /></td>
+						</tr>
+						<tr>
+							<td>周日上班时间</td>
+							<td><input type="text" name="sunWorkTime"
+								class="easyui-validatebox" required="true" /></td>
+						</tr>
+						<tr>
+							<td>周日休息时间</td>
+							<td><input type="text" name="sunDutyTime"
+								class="easyui-validatebox" required="true" /></td>
+						</tr>
+						<tr>
+							<td>状态</td>
+							<td><input type="text" name="status"
+								class="easyui-validatebox" required="true" /></td>
+						</tr>
+						<tr>
+							<td>所属单位</td>
+							<td><input type="text" name="company"
+								class="easyui-validatebox" required="true" /></td>
+						</tr>
+						<tr>
+							<td>操作人</td>
+							<td><input type="text" name="operator"
+								class="easyui-validatebox" required="true" /></td>
+						</tr>
+						<tr>
+							<td>操时间</td>
+							<td><input type="text" name="operatingTime"
+								class="easyui-validatebox" required="true" /></td><!--时间戳-->
+						</tr>
+						<tr>
+							<td>操作单位</td>
+							<td><input type="text" name="operatingCompany"
+								class="easyui-validatebox" required="true" /></td>
+						</tr>
+					</table>
+				</form>
+			</div>
 		</div>
 	</body>
 </html>

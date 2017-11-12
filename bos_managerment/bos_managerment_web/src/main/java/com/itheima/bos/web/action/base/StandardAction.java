@@ -36,7 +36,7 @@ public class StandardAction extends BaseAction<Standard> {
 	public Standard getModel() {
 		return model;
 	}
-	@Action(value="standardAction_save",results={@Result(name="success",type="redirect",location="pages/base/standard.html")})
+	@Action(value="standardAction_save",results={@Result(name="success",type="redirect",location="/pages/base/standard.html")})
 	public String save(){
 	    standardService.save(model);
 	    return SUCCESS;

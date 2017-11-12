@@ -1,6 +1,8 @@
 package com.itheima.bos.service.base.impl;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,14 +18,17 @@ import com.itheima.bos.service.base.CourierService;
 public class CourierServiceImpl implements CourierService {
 	@Autowired
 	private CourierRepository courierRepository;
+	
 	@Override
 	public void save(Courier model) {
 		courierRepository.save(model);
 	}
+	
 	@Override
 	public Page<Courier> pageQuery(Pageable pageable) {
 		return courierRepository.findAll(pageable);
 	}
+	
 	@Override
 	public void deleteById(String[] ids) {
 		for (int i = 0; i < ids.length; i++) {
@@ -32,6 +37,7 @@ public class CourierServiceImpl implements CourierService {
 			courierRepository.update(id);
 		}
 	}
+	
 	@Override
 	public void declineById(String[] ids) {
 		for (int i = 0; i < ids.length; i++) {
@@ -40,9 +46,24 @@ public class CourierServiceImpl implements CourierService {
 			courierRepository.decline(id);
 		}
 	}
+	
     @Override
     public Page<Courier> pageQuery(Specification<Courier> specification, Pageable pageable) {
         return courierRepository.findAll(specification, pageable);
+    }
+    
+    
+    @Override
+    public List<Courier> findAll() {
+
+        return courierRepository.findAll();
+    
+    }
+
+    @Override
+    public List<Courier> findByDelTagisNull() {
+          
+        return courierRepository.findByDeltagIsNull();
     }
 
 }

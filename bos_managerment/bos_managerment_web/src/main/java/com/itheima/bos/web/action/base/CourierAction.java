@@ -16,6 +16,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
+import org.bouncycastle.jce.provider.JDKDSASigner.noneDSA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.Page;
@@ -43,29 +44,37 @@ public class CourierAction extends BaseAction<Courier>{
 	}
 	@Autowired
 	private CourierService courierService;
-	@Action(value="courierAction_save",results={@Result(name="success",type="redirect",location="pages/base/courier.html")})
+	@Action(value="courierAction_save",results={@Result(name="success",type="redirect",location="/pages/base/courier.html")})
 	public String save(){													
 		courierService.save(getModel());
 		return SUCCESS;
 	}
-	@Action(value="courierAction_deleteById",results={@Result(name="success",type="redirect",location="pages/base/courier.html")})
+	
+	//作废快递员信息
+	@Action(value="courierAction_deleteById",results={@Result(name="success",type="redirect",location="/pages/base/courier.html")})
 	public String deleteById(){
-		System.out.println(IDS);
 		if(!StringUtils.isEmpty(IDS)){
 		String[] ids = IDS.split(",");
 			courierService.deleteById(ids);
 		}
 		return SUCCESS;
 	}
+	
+	//恢复快递员信息
 	@Action(value="courierAction_declineById",results={@Result(name="success",type="redirect",location="pages/base/courier.html")})
 	public String declineById(){
-		System.out.println(IDS);
 		if(!StringUtils.isEmpty(IDS)){
 		String[] ids = IDS.split(",");
 			courierService.declineById(ids);
 		}
 		return SUCCESS;
 	}
+	@Action(value="courierAction_finAll")
+    public String finAll() throws IOException{
+        List<Courier> list = courierService.findByDelTagisNull();
+        List2Json(list, new String[] {"fixedAreas"});
+	    return NONE;
+    }
 	@Action("courierAciton_pageQuery")
 	public String pageQuery() throws IOException{
 	    Specification<Courier> specification = new Specification<Courier>() {

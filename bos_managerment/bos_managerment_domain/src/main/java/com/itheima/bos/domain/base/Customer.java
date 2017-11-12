@@ -19,22 +19,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 //@Table(name = "T_CUSTOMER")
 @XmlRootElement(name = "customer")  //这个注解用于webservice服务时,生成xml文件时"customer"作为xml跟节点
 public class Customer {
-   /* @Id
+    @Id
     @GeneratedValue()
-    @Column(name = "C_ID")*/
+    @Column(name = "C_ID")
     private Long id; // 主键id
-    // @Column(name = "C_USERNAME")
+    @Column(name = "C_USERNAME")
     private String username; // 用户名
-    //@Column(name = "C_PASSWORD")
+    @Column(name = "C_PASSWORD")
     private String password; // 密码
-    //@Column(name = "C_TYPE")
+    @Column(name = "C_TYPE")
     private Integer type; // 类型
-    //@Column(name = "C_BRITHDAY")
-    //@Temporal(TemporalType.DATE)
+    @Column(name = "C_BRITHDAY")
+    @Temporal(TemporalType.DATE)
     private Date birthday; // 生日
-    //@Column(name = "C_SEX")
+    @Column(name = "C_SEX")
     private Integer sex; // 性别
-    //@Column(name = "C_TELEPHONE")
+    @Column(name = "C_TELEPHONE")
     private String telephone; // 手机
     @Column(name = "C_COMPANY")
     private String company; // 公司

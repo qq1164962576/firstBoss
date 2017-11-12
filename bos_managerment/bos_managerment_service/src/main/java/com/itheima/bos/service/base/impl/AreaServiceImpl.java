@@ -46,6 +46,11 @@ public class AreaServiceImpl implements AreaService {
         return areaRepository.findByQ("%"+q+"%");
         
     }
+    @Override
+    public void save(Area area) {
+        areaRepository.save(area);
+        
+    }
 
 }
   

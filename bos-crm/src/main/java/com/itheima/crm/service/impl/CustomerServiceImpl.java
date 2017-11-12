@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.itheima.crm.dao.CustomerRepository;
 import com.itheima.crm.domain.Customer;
 import com.itheima.crm.service.CustomerService;
+import com.ithiema.utils.MD5Util;
 
 /**  
  * ClassName:CustomerServiceImpl <br/>  
@@ -50,6 +51,42 @@ public class CustomerServiceImpl implements CustomerService {
         for (Long id : ids) {
             customerRepository.associated(fixedAreaId,id);
         }
+    }
+
+    @Override
+    public void regist(Customer customer) {
+        String telephone = MD5Util.MD5_tops(customer.getTelephone());
+        String password = MD5Util.MD5_tops(customer.getPassword());
+        customer.setTelephone(telephone);
+        customer.setPassword(password);
+        customerRepository.save(customer);
+    }
+    
+    @Override
+    public void active(String telephone) {
+        String telephone5 = MD5Util.MD5_tops(telephone);
+        customerRepository.active(telephone5);
+        
+    }
+
+    @Override
+    public Customer findByTelephone(String telephone) {
+        String telephone5 = MD5Util.MD5_tops(telephone);
+        return customerRepository.findByTelephone(telephone5);
+    }
+
+    @Override
+    public Customer login(String telephone, String password) {
+        String telephone5 = MD5Util.MD5_tops(telephone);
+        String password5 = MD5Util.MD5_tops(password);  
+        return customerRepository.findByTelephoneAndPassword(telephone5, password5);
+
+    }
+
+    @Override
+    public Long findfixedAreaId(String sendAdrress) {
+          
+        return customerRepository.findByAddress(sendAdrress);
     }
 
 }

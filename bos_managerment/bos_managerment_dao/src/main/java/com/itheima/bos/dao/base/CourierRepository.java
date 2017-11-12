@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.itheima.bos.domain.base.Courier;
+import java.lang.Character;
+import java.util.List;
 
 public interface CourierRepository extends JpaRepository<Courier, Long>,JpaSpecificationExecutor<Courier> {
 	@Modifying
@@ -14,4 +16,6 @@ public interface CourierRepository extends JpaRepository<Courier, Long>,JpaSpeci
 	@Modifying
 	@Query("update Courier set deltag = null where C_ID = ?")
 	void decline(long id);
+	
+	List<Courier> findByDeltagIsNull();
 }

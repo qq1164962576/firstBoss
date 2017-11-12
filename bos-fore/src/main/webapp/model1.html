@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<script type="text/javascript" src="../plugins/jquery.min.js" ></script>
+	<link rel="stylesheet" href="../js/citypicker/css/city-picker.css" />
+	<script type="text/javascript" src="../js/citypicker/js/city-picker.data.js" ></script>
+	<script type="text/javascript" src="../plugins/city-picker.js"></script>
+	<script type="text/javascript" src="../js/citypicker/js/city-picker.min.js" ></script>
+	
+	<script type="text/javascript">
+		$(function() {
+			$('#citypicker').citypicker();
+		})
+
+		function clearContent() {
+			$('#citypicker').citypicker("reset");
+		}
+	</script>
+		
+	</body>
+		<div style="position: relative; width: 250px">
+	
+
+		<input style="width: 250px" id="citypicker" type="text"> <input
+			type="button" onclick="clearContent()" value="重置">
+	</div>
+	
+
+</html>

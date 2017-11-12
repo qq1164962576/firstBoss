@@ -36,7 +36,7 @@ import net.sf.json.JsonConfig;
 public class subAreaAction extends BaseAction<SubArea> {
     @Autowired
     private SubAreaService subAreaService;
-    @Action(value="subareaAction_save",results={@Result(name="success",type="redirect",location="pages/base/sub_area.html")})
+    @Action(value="subareaAction_save",results={@Result(name="success",type="redirect",location="/pages/base/sub_area.html")})
     public String save() {
         subAreaService.save(getModel());
         return SUCCESS;
@@ -44,10 +44,10 @@ public class subAreaAction extends BaseAction<SubArea> {
     @Action("subareaAction_findAll")
     public String findAll() throws IOException{
         List<SubArea> list = subAreaService.findAll();
-        List2Json(list, new String[] {"subareas"});
+        List2Json(list, new String[] {"subareas","fixedArea"});
         return NONE;
     }
-    @Action(value="subareaAction_pageQuery",results={@Result(name="success",type="redirect",location="pages/base/sub_area.html")})
+    @Action(value="subareaAction_pageQuery",results={@Result(name="success",type="redirect",location="/pages/base/sub_area.html")})
     public String pageQuery() throws IOException {
         Pageable pageable = new PageRequest(page - 1, rows);
         Page<SubArea> page = subAreaService.pageQuery(pageable);

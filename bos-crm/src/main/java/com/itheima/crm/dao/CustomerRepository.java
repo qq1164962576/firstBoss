@@ -8,6 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.itheima.crm.domain.Customer;
 
+import groovy.time.BaseDuration.From;
+
+import java.lang.String;
+
 /**  
  * ClassName:CustomerRepository <br/>  
  * Function:  <br/>  
@@ -23,6 +27,13 @@ public interface CustomerRepository extends JpaRepository<Customer , Long>{
     @Modifying
     @Query("update Customer set fixedAreaId = ? where id = ?")
     void associated(String fixedAreaId, Long id);
+    Customer findByTelephone(String telephone);
+    @Modifying
+    @Query("update Customer set type=1 where telephone = ?")
+    void active(String telephone);
     
+    Customer findByTelephoneAndPassword(String telephone,String password);
+    @Query("select fixedAreaId from Customer where address = ? ")
+    Long findByAddress (String address);
 }
   
