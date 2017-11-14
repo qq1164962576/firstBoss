@@ -21,5 +21,7 @@ public interface OrderService {
     @Path("/createorder")
     public void save(Order order);
 
+    public Order findOrderByNum(String orderNum);
+    
 }
   

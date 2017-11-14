@@ -58,14 +58,14 @@
 		################################# 指定ActiveMQ 连接工厂 ########################################
 		真正可以产生Connection的ConnectionFactory，由对应的 JMS服务厂商提供
 	-->
-	<!-- <bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+	 <bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<constructor-arg index="0" value="admin"></constructor-arg>
 		<constructor-arg index="1" value="admin"></constructor-arg>
 		<constructor-arg index="2" value="tcp://localhost:61616"></constructor-arg>
-	</bean> -->
+	</bean> 
 	<!-- 上面和下面两种方式是同样的效果 -->
-	<amq:connectionFactory id="xx" userName="admin"
-		password="admin" brokerURL="tcp://localhost:61616"></amq:connectionFactory>
+	<!-- <amq:connectionFactory id="xx" userName="admin"
+		password="admin" brokerURL="tcp://localhost:61616"></amq:connectionFactory> -->
 
 	<!--
 		################################# 指定Spring Caching连接工厂 #################################
@@ -73,7 +73,7 @@
 	<bean id="connectionFactory"
 		class="org.springframework.jms.connection.CachingConnectionFactory">
 		<!-- 目标ConnectionFactory对应真实的可以产生JMS Connection的ConnectionFactory -->
-		<property name="targetConnectionFactory" ref="xx"></property>
+		<property name="targetConnectionFactory" ref="amqConnectionFactory"></property>
 		<!-- Session缓存数量 -->
 		<property name="sessionCacheSize" value="100" />
 	</bean>

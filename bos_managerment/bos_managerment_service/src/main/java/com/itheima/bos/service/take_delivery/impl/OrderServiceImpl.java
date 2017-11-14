@@ -18,6 +18,7 @@ import com.itheima.bos.dao.base.AreaRepository;
 import com.itheima.bos.dao.base.FixedAreaRepository;
 import com.itheima.bos.dao.base.SubAreaRepository;
 import com.itheima.bos.dao.take_delivery.OrderRepository;
+import com.itheima.bos.dao.take_delivery.WorkBillRepository;
 import com.itheima.bos.domain.base.Area;
 import com.itheima.bos.domain.base.Courier;
 import com.itheima.bos.domain.base.FixedArea;
@@ -42,18 +43,14 @@ public class OrderServiceImpl implements OrderService {
     private AreaRepository areaRepository;
     @Autowired
     private FixedAreaRepository fixedAreaRepository;
-    @Override
+    @Autowired
+    private WorkBillRepository WorkBillRepository;
     public void save(Order order) {
         //查出定区
         Area sendArea = order.getSendArea();
         if(sendArea!=null) {
             Area sendAreaDB = areaRepository.findByProvinceAndCityAndDistrict(sendArea.getProvince(), sendArea.getCity(), sendArea.getDistrict());
-            Set<SubArea> subareas = sendAreaDB.getSubareas();
-            for (SubArea subArea : subareas) {
-                System.out.println(subArea);
-            }
             order.setSendArea(sendAreaDB);
-            
         }
         Area recArea = order.getRecArea();
 
@@ -87,8 +84,10 @@ public class OrderServiceImpl implements OrderService {
                     workBill.setOrder(order);
                     workBill.setType("新");
                     workBill.setPickstate(order.getRemark());
+                    order.getWorkBills().add(workBill);
                     System.out.println("根据customer_address订单保存成功");
                     orderRepository.save(order);
+                    WorkBillRepository.save(workBill);
                     return;
                 }
             }
@@ -103,6 +102,7 @@ public class OrderServiceImpl implements OrderService {
                     FixedArea fixedArea = subArea.getFixedArea();
                     Set<Courier> couriers = fixedArea.getCouriers();
                     if(couriers!=null) {
+                        
                         Courier courier = couriers.iterator().next();
                         order.setCourier(courier);
                         String numeric = RandomStringUtils.randomNumeric(32);
@@ -131,6 +131,12 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(order);
         
         
+    }
+    @Override
+    public Order findOrderByNum(String orderNum) {
+          
+        System.out.println(orderNum);
+        return orderRepository.findByOrderNum(orderNum);
     }
     
 }

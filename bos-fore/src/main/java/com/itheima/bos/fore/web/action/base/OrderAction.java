@@ -26,7 +26,7 @@ import com.opensymphony.xwork2.ModelDriven;
  * Date:     Nov 11, 2017 7:09:06 PM <br/>       
  */
 @Namespace("/")
-@ParentPackage("struts-default")
+@ParentPackage("json-default")
 @Controller
 @Scope("prototype")
 public class OrderAction extends ActionSupport implements ModelDriven<Order>{

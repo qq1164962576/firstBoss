@@ -35,7 +35,11 @@
 			function doSave(){
 				$("#grid").datagrid('endEdit',editIndex );
 			}
-			
+			function doDelete() {
+				if(editIndex!= undefined){
+					$("#grid").datagrid('deleteRow',editIndex );
+				}
+			}
 			function doCancel(){
 				if(editIndex!=undefined){
 					$("#grid").datagrid('cancelEdit',editIndex);
@@ -62,6 +66,11 @@
 				text : '保存',
 				iconCls : 'icon-save',
 				handler : doSave
+			},{
+				id : 'button-save',
+				text : '删除',
+				iconCls : 'icon-save',
+				handler : doDelete
 			}];
 			// 定义列
 			var columns = [ [ {
@@ -76,7 +85,7 @@
 					}
 				}
 			}, {
-				field : 'arrivecity',
+				field : 'arriveCity',
 				title : '到达地',
 				width : 120,
 				align : 'center',
@@ -153,12 +162,21 @@
 					onAfterEdit : function(rowIndex, rowData, changes){
 						console.info(rowData);
 						editIndex = undefined;
+						$.post("../../waybillAction_save.action", rowData,
+								function(data) {
+									if (data == "0") {
+										$.messager.alert("提示信息",
+												"数据保存失败,请检查数据", "info")
+									}
+								})
 					}
 				});
 			});
 		
 			function doDblClickRow(rowIndex, rowData){
-				alert("双击表格数据...");
+				if(editIndex!=undefined){
+					$("#grid").datagrid('endEdit',editIndex);
+				}
 				console.info(rowIndex);
 				$('#grid').datagrid('beginEdit',rowIndex);
 				editIndex = rowIndex;

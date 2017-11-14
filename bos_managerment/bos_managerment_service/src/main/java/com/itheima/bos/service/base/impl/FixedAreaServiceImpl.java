@@ -59,6 +59,7 @@ public class FixedAreaServiceImpl implements FixedAreaService {
         for (SubArea subArea : list) {
             subArea.setFixedArea(null);
         }
+        // subAreaRepository.updateById(fixedAreaId)  update subarea set fixedareaid = null where fixedareaid = ? 
           if(subAreaIds!=null&&subAreaIds.size()>0) {
               //获取fixedArea持久态
               for (Long subAreaid : subAreaIds) {
