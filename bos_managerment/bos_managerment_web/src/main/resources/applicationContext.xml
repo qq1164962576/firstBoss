@@ -70,13 +70,56 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-	
-	
+
+	<!-- 注册shiro框架的工厂类,初始化框架提供的过滤器 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!--注册管理-->
+		<property name="securityManager" ref="securityManager"></property>
+		<!--登录页面-->
+		<property name="loginUrl" value="/login.html"></property>
+		<!--登录成功的跳转的页面-->
+
+		<property name="successUrl" value="/index,html"></property>
+
+		<!-- 登录失败或者权限不足跳转的页面 -->
+		<property name="unauthorizedUrl" value="/unauthorized.html"></property>
+		<!--过滤规则-->
+		<property name="filterChainDefinitions">
+			<!-- authc : 框架提供的过滤器,检查权限,如果有权限直接放行,没有权限,拒绝访问 -->
+			<!-- anon : 框架提供的过滤器,可以进行匿名访问 -->
+			<!-- 格式化代码的时候,规则不允许折行 -->
+			<value>
+				/unauthorized.html = anon
+				/unauthorized1.html = anon
+				/css/* = anon
+				/images/* = anon
+				/js/** =anon
+				/validatecode.jsp* = anon
+				/userAction_login.action = anon
+				/courierAciton_pageQuery.action = perms["courier_PageQuery"]
+				/** = authc
+
+			</value>
+		</property>
+
+	</bean>
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+
+		<property name="securityManager" ref="securityManager"></property>
+	</bean>
+
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="userRealm"></property>
+	</bean>
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator">
+		
+		<property name="proxyTargetClass" value="true"></property>
+	</bean>
 	
 	<context:component-scan base-package="com.itheima.bos.service,com.itheima.bos.web.action" />
 
 	<!-- 开启事务注解 -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager" />
 	<!--
 		#########################################################
 		指定Spring Data JPA要进行扫描的包,该包中的类框架会自动为其创建代理

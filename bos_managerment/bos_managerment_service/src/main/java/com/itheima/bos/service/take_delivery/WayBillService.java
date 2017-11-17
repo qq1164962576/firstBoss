@@ -2,6 +2,8 @@ package com.itheima.bos.service.take_delivery;
 
 import com.itheima.bos.domain.take_delivery.WayBill;
 
+import java.util.List;
+
 /**  
  * ClassName:WayBillService <br/>  
  * Function:  <br/>  
@@ -10,6 +12,7 @@ import com.itheima.bos.domain.take_delivery.WayBill;
 public interface WayBillService {
 
     void save(WayBill model);
-    
+
+    List<WayBill> findAll();
 }
   

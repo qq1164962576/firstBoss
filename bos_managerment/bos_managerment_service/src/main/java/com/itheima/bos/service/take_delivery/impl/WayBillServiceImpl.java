@@ -8,6 +8,8 @@ import com.itheima.bos.dao.take_delivery.WayBillRepository;
 import com.itheima.bos.domain.take_delivery.WayBill;
 import com.itheima.bos.service.take_delivery.WayBillService;
 
+import java.util.List;
+
 /**  
  * ClassName:WayBillServiceImpl <br/>  
  * Function:  <br/>  
@@ -22,6 +24,11 @@ public class WayBillServiceImpl implements WayBillService {
     public void save(WayBill model) {
         
         wayBillRepository.save(model);
+    }
+
+    @Override
+    public List<WayBill> findAll() {
+        return wayBillRepository.findAll();
     }
 
 }

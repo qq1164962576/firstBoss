@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bos-crm" />
+        <module name="bos-fore" />
+        <module name="bos_managerment_dao" />
+        <module name="bos_managerment_domain" />
+        <module name="bos_managerment_service" />
+        <module name="bos_managerment_web" />
+        <module name="cxf-client" />
+        <module name="Jutils" />
+        <module name="middleware" />
+        <module name="service-cxf-rs" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bos-crm" target="1.7" />
+      <module name="bos-fore" target="1.7" />
+      <module name="bos_managerment" target="1.7" />
+      <module name="bos_managerment_dao" target="1.7" />
+      <module name="bos_managerment_domain" target="1.7" />
+      <module name="bos_managerment_service" target="1.7" />
+      <module name="bos_managerment_web" target="1.7" />
+      <module name="common-parent" target="1.7" />
+      <module name="cxf-client" target="1.7" />
+      <module name="Jutils" target="1.7" />
+      <module name="middleware" target="1.7" />
+      <module name="service-cxf-rs" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

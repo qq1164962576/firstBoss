@@ -2,6 +2,7 @@ package com.itheima.bos.web.action.take_delivery;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -42,6 +43,12 @@ public class WayBillAction extends BaseAction<WayBill>{
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("text/html;charset=utf-8");
         response.getWriter().write(flag);
+        return NONE;
+    }
+    @Action("wayBillAction_findAll")
+    public String findAll() throws IOException {
+        List<WayBill> list = wayBillService.findAll();
+        List2Json(list,new String[] {"order"});
         return NONE;
     }
 }

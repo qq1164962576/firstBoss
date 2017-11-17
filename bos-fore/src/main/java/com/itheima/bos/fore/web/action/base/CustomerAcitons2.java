@@ -1,7 +1,6 @@
 package com.itheima.bos.fore.web.action.base;
 
 
-import static org.hamcrest.CoreMatchers.nullValue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,12 +16,10 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.components.Select;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
-import org.aspectj.internal.lang.annotation.ajcDeclareAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -32,7 +29,6 @@ import org.springframework.stereotype.Controller;
 
 import com.itheima.bos.fore.domain.Customer;
 import com.ithiema.utils.MailUtils;
-import com.ithiema.utils.SmsUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;

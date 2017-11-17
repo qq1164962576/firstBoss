@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="bos_managerment_web:war">
+    <output-path>$PROJECT_DIR$/bos_managerment/bos_managerment_web/target</output-path>
+    <root id="archive" name="bos_managerment_web-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="bos_managerment_web:war exploded" />
+    </root>
+  </artifact>
+</component>

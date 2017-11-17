@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Jutils/Jutils.iml" filepath="$PROJECT_DIR$/Jutils/Jutils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bos-crm/bos-crm.iml" filepath="$PROJECT_DIR$/bos-crm/bos-crm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bos-fore/bos-fore.iml" filepath="$PROJECT_DIR$/bos-fore/bos-fore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bos_managerment/bos_managerment.iml" filepath="$PROJECT_DIR$/bos_managerment/bos_managerment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bos_managerment/bos_managerment_dao/bos_managerment_dao.iml" filepath="$PROJECT_DIR$/bos_managerment/bos_managerment_dao/bos_managerment_dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bos_managerment/bos_managerment_domain/bos_managerment_domain.iml" filepath="$PROJECT_DIR$/bos_managerment/bos_managerment_domain/bos_managerment_domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bos_managerment/bos_managerment_service/bos_managerment_service.iml" filepath="$PROJECT_DIR$/bos_managerment/bos_managerment_service/bos_managerment_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bos_managerment/bos_managerment_web/bos_managerment_web.iml" filepath="$PROJECT_DIR$/bos_managerment/bos_managerment_web/bos_managerment_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-parent/common-parent.iml" filepath="$PROJECT_DIR$/common-parent/common-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cxf-client/cxf-client.iml" filepath="$PROJECT_DIR$/cxf-client/cxf-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/middleware/middleware.iml" filepath="$PROJECT_DIR$/middleware/middleware.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-cxf-rs/service-cxf-rs.iml" filepath="$PROJECT_DIR$/service-cxf-rs/service-cxf-rs.iml" />
+    </modules>
+  </component>
+</project>

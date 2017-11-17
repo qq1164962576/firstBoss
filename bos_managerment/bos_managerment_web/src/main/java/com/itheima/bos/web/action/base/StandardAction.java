@@ -44,6 +44,7 @@ public class StandardAction extends BaseAction<Standard> {
 	@Action("standardAction_findAll")
 	public String findAll() throws IOException{
 		List<Standard> list = standardService.findAll();
+		List2Json(list,null);
 		return NONE;
 	}
 	@Action("standardAction_pageQuery")

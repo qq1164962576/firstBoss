@@ -12,6 +12,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -42,8 +43,10 @@ public class CourierAction extends BaseAction<Courier>{
 	public void setIDS(String IDS) {
 		this.IDS = IDS;
 	}
+
 	@Autowired
 	private CourierService courierService;
+
 	@Action(value="courierAction_save",results={@Result(name="success",type="redirect",location="/pages/base/courier.html")})
 	public String save(){													
 		courierService.save(getModel());
