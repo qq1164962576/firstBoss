@@ -318,7 +318,5 @@
 
 
 	</dependencies>
-	<modules>
-		<module>itheimaUtils</module>
-	</modules>
+
 </project>

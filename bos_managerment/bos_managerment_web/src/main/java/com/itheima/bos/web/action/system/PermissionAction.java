@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @Namespace("/")
@@ -35,5 +36,11 @@ public class PermissionAction extends BaseAction<Permission> {
     public String save(){
         permissionService.save(getModel());
         return SUCCESS;
+    }
+    @Action("permissionAction_findAll")
+    public String findAll() throws IOException {
+        List<Permission> list =  permissionService.findAll();
+        List2Json(list,new String[]{"roles"});
+        return NONE;
     }
 }

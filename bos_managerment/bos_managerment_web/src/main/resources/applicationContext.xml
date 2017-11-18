@@ -96,7 +96,7 @@
 				/js/** =anon
 				/validatecode.jsp* = anon
 				/userAction_login.action = anon
-				/courierAciton_pageQuery.action = perms["courier_PageQuery"]
+				/courierAciton_pageQuery.action = perms["courier:list"]
 				/** = authc
 
 			</value>
@@ -110,12 +110,17 @@
 
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="userRealm"></property>
+		<property name="cacheManager" ref="cacheManager"></property>
+	</bean>
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:ehcache.xml"></property>
 	</bean>
 	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator">
 		
 		<property name="proxyTargetClass" value="true"></property>
 	</bean>
-	
+
+
 	<context:component-scan base-package="com.itheima.bos.service,com.itheima.bos.web.action" />
 
 	<!-- 开启事务注解 -->
@@ -126,5 +131,36 @@
 		#########################################################
 	-->
 	<jpa:repositories base-package="com.itheima.bos.dao" />
+	<!-- 指定任务详情 -->
+	<bean id="jobDetail"
+		  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 指定要调用的对象 -->
+		<property name="targetObject" ref="workbillJob"></property>
+		<!-- 指定要调用的方法 -->
+		<property name="targetMethod" value="sendEmail"></property>
+	</bean>
+	<!-- 注册触发器 -->
+	<bean id="workbillTrigger"
+		  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<!-- 注入任务详情 -->
+		<property name="jobDetail" ref="jobDetail"></property>
+		<!-- 指定调度的规则 -->
+		<property name="cronExpression">
+			<value>0/5 * * * * ? 2099 </value>
+		</property>
+	</bean>
+	<!-- 指定调度工厂 -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<!-- 注入触发器 -->
+		<property name="triggers">
+			<list>
+				<ref bean="workbillTrigger" />
+			</list>
+		</property>
+	</bean>
+
+
+
+
 
 </beans>

@@ -10,7 +10,6 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <modules>
-  	<module>bos_managerment_daomain</module>
   	<module>bos_managerment_dao</module>
   	<module>bos_managerment_service</module>
   	<module>bos_managerment_web</module>

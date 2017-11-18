@@ -19,6 +19,9 @@
 			function doAdd(){
 				$('#addWindow').window("open");
 			}
+			function doExportExcel() {
+				window.location.href="../../areaAction_exportExcel.action";
+            }
 			
 			function doView(){
 				alert("修改...");
@@ -45,10 +48,15 @@
 				iconCls : 'icon-cancel',
 				handler : doDelete
 			}, {
-				id : 'button-import',
-				text : '导入',
-				iconCls : 'icon-redo'
-			}];
+                id : 'button-import',
+                text : '导入',
+                iconCls : 'icon-redo'
+            }, {
+                id : 'button-export',
+                text : '导出',
+                iconCls : 'icon-undo',
+                handler: doExportExcel
+            }];
 			// 定义列
 			var columns = [ [ {
 				field : 'id',
@@ -119,6 +127,7 @@
 				$("#button-import").upload({
 					action:"../../areaAction_importXls.action"
 				});
+
 			});
 			
 			function doDblClickRow(){

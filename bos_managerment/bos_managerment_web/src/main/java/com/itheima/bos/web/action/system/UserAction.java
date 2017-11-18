@@ -1,6 +1,7 @@
 package com.itheima.bos.web.action.system;
 
 import com.itheima.bos.domain.system.User;
+import com.itheima.bos.service.system.UserService;
 import com.itheima.bos.web.action.base.BaseAction;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -14,9 +15,15 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 
+import java.io.IOException;
+import java.util.List;
 
 
 @Namespace("/")
@@ -26,11 +33,25 @@ import org.springframework.stereotype.Controller;
 
 public class UserAction extends BaseAction<User> {
     private String validatecode;
-
+    @Autowired
+    private UserService userService;
     public void setValidatecode(String validatecode) {
         this.validatecode = validatecode;
     }
+    private List<Long> roleIds;
 
+    public void setRoleIds(List<Long> roleIds) {
+        this.roleIds = roleIds;
+    }
+
+    @Action(value = "userAction_save", results = {@Result(name = "success",
+            location = "/pages/system/userlist.html", type = "redirect")}
+
+    )
+    public String save() {
+        userService.save(getModel(),roleIds);
+        return SUCCESS;
+    }
     @Action(value="userAction_login",results={
             @Result(name="success",type="redirect",location="/index.html"),
             @Result(name="error",type="redirect",location="/unauthorized.html"),
@@ -72,5 +93,13 @@ public class UserAction extends BaseAction<User> {
         SecurityUtils.getSubject().logout();
         ServletActionContext.getRequest().getSession().invalidate();
         return SUCCESS;
+    }
+
+    @Action(value = "userAction_findPageQuery")
+    public String findPageQuery() throws IOException {
+        Pageable pageable = new PageRequest(page - 1, rows);
+        Page<User> page = userService.findPageQuery(pageable);
+        Map2Json(page,new String[]{"roles"});
+        return NONE;
     }
 }

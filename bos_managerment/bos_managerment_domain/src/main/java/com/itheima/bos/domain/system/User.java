@@ -1,5 +1,7 @@
 package com.itheima.bos.domain.system;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "T_USER")
-public class User {
+public class User implements Serializable {
 
 	@Id
 	@GeneratedValue
@@ -127,4 +129,13 @@ public class User {
 		this.roles = roles;
 	}
 
+	/*public String getBirthdays(){
+		if(birthday!=null){
+			SimpleDateFormat simpleDateFormat =	new SimpleDateFormat("yyyy-MM-dd");
+			String fomate = simpleDateFormat.format(birthday);
+			return fomate;
+		}else {
+			return "";
+		}
+	}*/
 }

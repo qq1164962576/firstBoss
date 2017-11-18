@@ -2,7 +2,9 @@ package com.itheima.bos.service.system.Impl;
 
 import com.itheima.bos.dao.system.MenuRepository;
 import com.itheima.bos.domain.system.Menu;
+import com.itheima.bos.domain.system.User;
 import com.itheima.bos.service.system.MenuService;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,5 +38,13 @@ public class MenuServiceImpl implements MenuService {
             model.setParentMenu(null);
         }
         menuRepository.save(model);
+    }
+
+    @Override
+    public List<Menu> findByUser() {
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+
+
+        return menuRepository.findByUid(user.getId());
     }
 }

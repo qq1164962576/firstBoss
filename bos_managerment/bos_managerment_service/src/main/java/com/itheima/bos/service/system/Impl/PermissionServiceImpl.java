@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class PermissionServiceImpl implements PermissionService {
@@ -22,5 +24,10 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public void save(Permission model) {
         permissionRepository.save(model);
+    }
+
+    @Override
+    public List<Permission> findAll() {
+        return permissionRepository.findAll();
     }
 }

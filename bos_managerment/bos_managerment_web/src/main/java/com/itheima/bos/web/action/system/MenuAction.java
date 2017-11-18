@@ -49,4 +49,12 @@ public class MenuAction extends BaseAction<Menu> {
         List2Json(list, new String[] {"roles", "childrenMenus", "parentMenu"});
         return NONE;
     }
+    @Action("menuAction_findByUser")
+    public String findByUser() throws IOException {
+
+        // 只查询所有的一级菜单,子菜单应该是通过父菜单的childrenMenus属性加载出来
+        List<Menu> list = menuService.findByUser();
+        List2Json(list, new String[] {"roles", "childrenMenus", "parentMenu", "children"});
+        return NONE;
+    }
 }

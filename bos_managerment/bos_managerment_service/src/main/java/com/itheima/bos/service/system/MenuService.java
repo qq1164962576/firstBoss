@@ -16,4 +16,6 @@ public interface MenuService {
     List<Menu> findAllLevelOne();
 
     void save(Menu model);
+
+    List<Menu> findByUser();
 }

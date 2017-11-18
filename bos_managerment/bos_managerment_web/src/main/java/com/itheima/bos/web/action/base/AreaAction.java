@@ -8,10 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import com.ithiema.utils.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -27,9 +31,12 @@ import com.itheima.bos.domain.base.Area;
 import com.itheima.bos.service.base.AreaService;
 import com.ithiema.utils.PinYin4jUtils;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
-/**  
+/**
  * ClassName:AreaAction <br/>  
  * Function:  <br/>  
  * Date:     Nov 3, 2017 10:47:49 AM <br/>       
@@ -109,6 +116,45 @@ public class AreaAction extends BaseAction<Area> {
         Pageable pageable = new PageRequest(page - 1, rows);
         Page<Area> page = areaService.pageQuery(pageable);
         Map2Json(page, new String[] {"subareas"});
+        return NONE;
+    }
+    @Action(value=("areaAction_exportExcel"))
+    public String exportExcel() throws IOException {
+        List<Area> list = areaService.findAll();
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet("区域数据");
+        HSSFRow titleRow = sheet.createRow(0);
+        titleRow.createCell(0).setCellValue("省");
+        titleRow.createCell(1).setCellValue("市");
+        titleRow.createCell(2).setCellValue("区");
+        titleRow.createCell(3).setCellValue("邮编");
+        titleRow.createCell(4).setCellValue("简码");
+        titleRow.createCell(5).setCellValue("城市编码");
+
+        for (Area area : list) {
+            HSSFRow dataRow = sheet.createRow(sheet.getLastRowNum()+1);
+            dataRow.createCell(0).setCellValue(area.getProvince());
+            dataRow.createCell(1).setCellValue(area.getCity());
+            dataRow.createCell(2).setCellValue(area.getDistrict());
+            dataRow.createCell(3).setCellValue(area.getPostcode());
+            dataRow.createCell(4).setCellValue(area.getShortcode());
+            dataRow.createCell(5).setCellValue(area.getCitycode());
+        }
+        String fileName = "区域数据.xls";
+
+        HttpServletRequest request = ServletActionContext.getRequest();
+        String agent = request.getHeader("User-Agent");
+        fileName = FileUtils.encodeDownloadFilename(fileName,agent);
+
+        HttpServletResponse response = ServletActionContext.getResponse();
+        // 设置文件的类型
+        response.setContentType(ServletActionContext.getServletContext().getMimeType(fileName));
+        // 设置 Content-Disposition 头
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+
+        ServletOutputStream outputStream = response.getOutputStream();
+        workbook.write(outputStream);
+        workbook.close();
         return NONE;
     }
 }

@@ -33,6 +33,7 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
         this.rows = rows;
     }
 	private T t;
+
 	public BaseAction() {
 		Class<? extends BaseAction> childrenClass = this.getClass();
 		Type type = childrenClass.getGenericSuperclass();
