@@ -73,5 +73,12 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(json);
     }
-	
+	public void MapToJson(Map<String, Object> map,String[] arr) throws IOException {
+        JsonConfig config = new JsonConfig();
+        config.setExcludes(arr);
+        String json = JSONObject.fromObject(map,config).toString();
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().write(json);
+    }
 }

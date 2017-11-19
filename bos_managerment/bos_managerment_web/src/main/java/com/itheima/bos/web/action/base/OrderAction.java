@@ -1,4 +1,4 @@
-package com.itheima.bos.web.action.take_delivery;
+package com.itheima.bos.web.action.base;
 
 
 import java.io.IOException;
@@ -19,7 +19,6 @@ import org.springframework.stereotype.Controller;
 
 import com.itheima.bos.domain.take_delivery.Order;
 import com.itheima.bos.service.take_delivery.OrderService;
-import com.itheima.bos.web.action.base.BaseAction;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
